@@ -14,6 +14,12 @@ app.use(cors({
     exposedHeaders: ['Authorization']
 }));
 
+app.use((req, res, next) => {
+    // Remove the Access-Control-Allow-Origin header
+    res.removeHeader('Access-Control-Allow-Origin');
+    next();
+  });
+
   app.get('/api', (req, res) => {
     res.header('Authorization', 'Bearer mytoken');
     res.send('Hello World!');
