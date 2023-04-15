@@ -1,17 +1,17 @@
-const mongoose = require('mongoose')
-mongoose.set('strictQuery', true)
-// mongoose.set(‘strictQuery’, true) 
-require('dotenv').config({ path: './config.env' })
-const ATLAS_URL = process.env.ATLAS_URL
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
+require('dotenv').config({ path: './config.env' });
+
+const ATLAS_URL = process.env.ATLAS_URL;
 
 // mongodb connect
-const conn = mongoose
-  .connect(ATLAS_URL)
+mongoose.connect(ATLAS_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
-    console.log('DataBase Connected .')
+    console.log('Database Connected.');
   })
-  .catch((e) => {
-    console.log('Error in Conecction !' + e)
-  })
-
-module.exports = conn;
+  .catch((err) => {
+    console.log('Error in Connection!', err);
+  });
