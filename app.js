@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express();
 const cors = require('cors'); 
-app.use(cors());
 require('./db/conn');
 const Curd = require("./model/model");
 const bodyParser = require('body-parser');
@@ -11,7 +10,14 @@ require('dotenv').config({ path: './config.env' })
 
 PORT = process.env.PORT;
 
+app.use(cors({
+    exposedHeaders: ['Authorization']
+}));
 
+  app.get('/api', (req, res) => {
+    res.header('Authorization', 'Bearer mytoken');
+    res.send('Hello World!');
+  });
 
 
 
